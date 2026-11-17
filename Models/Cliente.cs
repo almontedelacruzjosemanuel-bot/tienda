@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
-public partial class Cliente
+public class Cliente
 {
     public int ClienteId { get; set; }
 
@@ -23,5 +21,5 @@ public partial class Cliente
 
     public virtual Ciudad? Ciudad { get; set; }
 
-    public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
+    public virtual ICollection<Venta> Ventas { get; set; } = new List<Venta>();
 }

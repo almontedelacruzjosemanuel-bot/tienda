@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
 
 namespace tienda.Models;
 
-public partial class Usuario
+public class Usuario
 {
     public int UsuarioId { get; set; }
 

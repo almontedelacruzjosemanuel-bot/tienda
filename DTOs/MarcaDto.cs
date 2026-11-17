@@ -3,9 +3,9 @@ namespace tienda.DTOs;
 
 public class MarcaDto
 {
-    public int IdMarca { get; set; }
+    public int MarcaId { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string? Nombre { get; set; }
 
     public string? PaisOrigen { get; set; }
 

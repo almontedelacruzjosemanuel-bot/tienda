@@ -3,9 +3,9 @@ namespace tienda.DTOs;
 
 public class ProveedorDto
 {
-    public int IdProveedor { get; set; }
+    public int ProveedorId { get; set; }
 
-    public string NombreEmpresa { get; set; } = null!;
+    public string? NombreEmpresa { get; set; }
 
     public string? ContactoNombre { get; set; }
 

@@ -33,11 +33,11 @@ public partial class Producto
 
     public virtual Categoria Categoria { get; set; } = null!;
 
-    public virtual ICollection<CompraDetalle> CompraDetalles { get; set; } = new List<CompraDetalle>();
-
-    public virtual ICollection<EspecificacionesTecnica> EspecificacionesTecnicas { get; set; } = new List<EspecificacionesTecnica>();
-
     public virtual Marca Marca { get; set; } = null!;
 
+    public virtual ICollection<CompraDetalle> CompraDetalles { get; set; } = new List<CompraDetalle>();
+
     public virtual ICollection<VentaDetalle> VentaDetalles { get; set; } = new List<VentaDetalle>();
+
+    public virtual ICollection<EspecificacionTecnica> EspecificacionesTecnicas { get; set; } = new List<EspecificacionTecnica>();
 }

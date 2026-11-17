@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
 
 namespace tienda.Models;
 
-public partial class Ciudad
+public class Ciudad
 {
     public int CiudadId { get; set; }
 
@@ -11,3 +9,4 @@ public partial class Ciudad
 
     public virtual ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
 }
+

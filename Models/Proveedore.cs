@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
-public partial class Proveedor
+public class Proveedor
 {
     public int ProveedorId { get; set; }
 

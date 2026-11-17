@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
-public partial class Categoria
+public class Categoria
 {
     public int CategoriaId { get; set; }
 
