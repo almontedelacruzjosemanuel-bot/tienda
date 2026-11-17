@@ -15,7 +15,7 @@ public partial class TiendaContext : DbContext
     {
     }
 
-    public virtual DbSet<Categorium> Categoria { get; set; }
+    public virtual DbSet<Categorium> Categorias { get; set; }
 
     public virtual DbSet<Cliente> Clientes { get; set; }
 
@@ -37,15 +37,13 @@ public partial class TiendaContext : DbContext
 
     public virtual DbSet<Ventum> Venta { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=gestion_inventario;Trusted_Connection=True;TrustServerCertificate=True;");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Categorium>(entity =>
         {
             entity.HasKey(e => e.IdCategoria).HasName("PK__Categori__CD54BC5A33375A55");
+
+            entity.ToTable("Categorias");
 
             entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
             entity.Property(e => e.Descripcion)
@@ -86,30 +84,24 @@ public partial class TiendaContext : DbContext
 
         modelBuilder.Entity<DetalleOrdenCompra>(entity =>
         {
-            entity.HasKey(e => e.IdDetalleCompra).HasName("PK__DetalleO__BD16E279F7A6B0F0");
+            entity.ToTable("CompraDetalles");
 
-            entity.ToTable("DetalleOrdenCompra");
+            entity.HasKey(d => d.CompraDetalleId);
 
-            entity.Property(e => e.IdDetalleCompra).HasColumnName("id_detalle_compra");
-            entity.Property(e => e.Cantidad).HasColumnName("cantidad");
-            entity.Property(e => e.CostoUnitario)
-                .HasColumnType("decimal(12, 2)")
-                .HasColumnName("costo_unitario");
-            entity.Property(e => e.IdOrdenCompra).HasColumnName("id_orden_compra");
-            entity.Property(e => e.IdProducto).HasColumnName("id_producto");
-            entity.Property(e => e.Subtotal)
-                .HasColumnType("decimal(12, 2)")
-                .HasColumnName("subtotal");
+            entity.Property(d => d.CompraDetalleId).HasColumnName("CompraDetalleId");
+            entity.Property(d => d.CompraId).HasColumnName("CompraId");
+            entity.Property(d => d.ProductoId).HasColumnName("ProductoId");
+            entity.Property(d => d.Cantidad).HasColumnName("Cantidad");
+            entity.Property(d => d.CostoUnitario).HasColumnName("CostoUnitario");
+            entity.Property(d => d.Subtotal).HasColumnName("Subtotal");
 
-            entity.HasOne(d => d.IdOrdenCompraNavigation).WithMany(p => p.DetalleOrdenCompras)
-                .HasForeignKey(d => d.IdOrdenCompra)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DetalleCompra_OrdenCompra");
+            entity.HasOne(d => d.Compra)
+                .WithMany(o => o.DetalleOrdenCompras)
+                .HasForeignKey(d => d.CompraId);
 
-            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.DetalleOrdenCompras)
-                .HasForeignKey(d => d.IdProducto)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DetalleCompra_Producto");
+            entity.HasOne(d => d.Producto)
+                .WithMany(p => p.DetalleOrdenCompras)
+                .HasForeignKey(d => d.ProductoId);
         });
 
         modelBuilder.Entity<DetalleVentum>(entity =>
@@ -204,70 +196,56 @@ public partial class TiendaContext : DbContext
 
         modelBuilder.Entity<OrdenCompra>(entity =>
         {
-            entity.HasKey(e => e.IdOrdenCompra).HasName("PK__OrdenCom__71B729AF094C83D9");
+            entity.ToTable("Compras");
 
-            entity.ToTable("OrdenCompra");
+            entity.HasKey(o => o.CompraId);
 
-            entity.Property(e => e.IdOrdenCompra).HasColumnName("id_orden_compra");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(50)
-                .HasColumnName("estado");
-            entity.Property(e => e.FechaOrden).HasColumnName("fecha_orden");
-            entity.Property(e => e.IdEmpleado).HasColumnName("id_empleado");
-            entity.Property(e => e.IdProveedor).HasColumnName("id_proveedor");
-            entity.Property(e => e.Total)
-                .HasColumnType("decimal(12, 2)")
-                .HasColumnName("total");
+            entity.Property(o => o.CompraId).HasColumnName("CompraId");
+            entity.Property(o => o.IdProveedor).HasColumnName("ProveedorId");
+            entity.Property(o => o.IdEmpleado).HasColumnName("EmpleadoId");
+            entity.Property(o => o.FechaOrden).HasColumnName("FechaOrden");
+            entity.Property(o => o.Total).HasColumnName("Total");
+            entity.Property(o => o.Estado).HasColumnName("Estado");
 
-            entity.HasOne(d => d.IdEmpleadoNavigation).WithMany(p => p.OrdenCompras)
-                .HasForeignKey(d => d.IdEmpleado)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_OrdenCompra_Empleado");
+            entity.HasOne(o => o.IdEmpleadoNavigation)
+                .WithMany(e => e.OrdenCompras)
+                .HasForeignKey(o => o.IdEmpleado);
 
-            entity.HasOne(d => d.IdProveedorNavigation).WithMany(p => p.OrdenCompras)
-                .HasForeignKey(d => d.IdProveedor)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_OrdenCompra_Proveedor");
-        });
+            entity.HasOne(o => o.IdProveedorNavigation)
+                .WithMany(p => p.OrdenCompras)
+                .HasForeignKey(o => o.IdProveedor);
+            });
 
-        modelBuilder.Entity<Producto>(entity =>
+        
+    modelBuilder.Entity<Producto>(entity =>
         {
-            entity.HasKey(e => e.IdProducto).HasName("PK__Producto__FF341C0D25914A49");
-
             entity.ToTable("Producto");
 
-            entity.Property(e => e.IdProducto).HasColumnName("id_producto");
-            entity.Property(e => e.CodigoSku)
-                .HasMaxLength(50)
-                .HasColumnName("codigo_sku");
-            entity.Property(e => e.Descripcion).HasColumnName("descripcion");
-            entity.Property(e => e.GarantiaMeses)
-                .HasMaxLength(50)
-                .HasColumnName("garantia_meses");
-            entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
-            entity.Property(e => e.IdMarca).HasColumnName("id_marca");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(150)
-                .HasColumnName("nombre");
-            entity.Property(e => e.PrecioCompra)
-                .HasColumnType("decimal(12, 2)")
-                .HasColumnName("precio_compra");
-            entity.Property(e => e.PrecioVenta)
-                .HasColumnType("decimal(12, 2)")
-                .HasColumnName("precio_venta");
-            entity.Property(e => e.StockActual).HasColumnName("stock_actual");
-            entity.Property(e => e.StockMinimo).HasColumnName("stock_minimo");
+            entity.HasKey(p => p.ProductoId);
 
-            entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Productos)
-                .HasForeignKey(d => d.IdCategoria)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Producto_Categoria");
+            entity.Property(p => p.ProductoId).HasColumnName("ProductoId");
+            entity.Property(p => p.CategoriaId).HasColumnName("CategoriaId");
+            entity.Property(p => p.MarcaId).HasColumnName("MarcaId");
+            entity.Property(p => p.Sku).HasColumnName("Sku");
+            entity.Property(p => p.Nombre).HasColumnName("Nombre");
+            entity.Property(p => p.Descripcion).HasColumnName("Descripcion");
+            entity.Property(p => p.Costo).HasColumnName("Costo");
+            entity.Property(p => p.Precio).HasColumnName("Precio");
+            entity.Property(p => p.Stock).HasColumnName("Stock");
+            entity.Property(p => p.PuntoReorden).HasColumnName("PuntoReorden");
+            entity.Property(p => p.Garantia).HasColumnName("Garantia");
+            entity.Property(p => p.MargenGanancia).HasColumnName("MargenGanancia");
+            entity.Property(p => p.Itbis).HasColumnName("Itbis");
 
-            entity.HasOne(d => d.IdMarcaNavigation).WithMany(p => p.Productos)
-                .HasForeignKey(d => d.IdMarca)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Producto_Marca");
+            entity.HasOne(p => p.Categoria)
+                .WithMany(c => c.Productos)
+                .HasForeignKey(p => p.CategoriaId);
+
+            entity.HasOne(p => p.Marca)
+                .WithMany(m => m.Productos)
+                .HasForeignKey(p => p.MarcaId);
         });
+
 
         modelBuilder.Entity<Proveedor>(entity =>
         {

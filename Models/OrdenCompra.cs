@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
 public partial class OrdenCompra
 {
-    public int IdOrdenCompra { get; set; }
+    public int CompraId { get; set; }
 
     public int IdProveedor { get; set; }
 
