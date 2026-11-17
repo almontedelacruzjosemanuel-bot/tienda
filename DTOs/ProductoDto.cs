@@ -9,9 +9,9 @@ public class ProductoDto
 
     public int MarcaId { get; set; }
 
-    public string Sku { get; set; } = null!;
+    public string? Sku { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string? Nombre { get; set; }
 
     public string? Descripcion { get; set; }
 
@@ -19,13 +19,13 @@ public class ProductoDto
 
     public decimal Precio { get; set; }
 
-    public int Stock { get; set; }
+    public int? Stock { get; set; }
 
-    public int PuntoReorden { get; set; }
+    public int? PuntoReorden { get; set; }
 
     public string? Garantia { get; set; }
 
-    public decimal MargenGanancia { get; set; }
+    public decimal? MargenGanancia { get; set; }
 
-    public decimal Itbis { get; set; }
+    public decimal? Itbis { get; set; }
 }

@@ -3,12 +3,11 @@ namespace tienda.DTOs;
 
 public class EspecificacionTecnicaDto
 {
-    public int IdEspecificacion { get; set; }
+    public int EspecificacionId { get; set; }
 
-    public int IdProducto { get; set; }
+    public int ProductoId { get; set; }
 
-    public string Clave { get; set; } = null!;
+    public string? Clave { get; set; }
 
-    public string Valor { get; set; } = null!;
+    public string? Valor { get; set; }
 }
-

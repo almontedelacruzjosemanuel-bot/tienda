@@ -9,9 +9,9 @@ public class Producto
 
     public int MarcaId { get; set; }
 
-    public string Sku { get; set; } = null!;
+    public string? Sku { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string? Nombre { get; set; }
 
     public string? Descripcion { get; set; }
 
@@ -19,23 +19,23 @@ public class Producto
 
     public decimal Precio { get; set; }
 
-    public int Stock { get; set; }
+    public int? Stock { get; set; }
 
-    public int PuntoReorden { get; set; }
+    public int? PuntoReorden { get; set; }
 
     public string? Garantia { get; set; }
 
-    public decimal MargenGanancia { get; set; }
+    public decimal? MargenGanancia { get; set; }
 
-    public decimal Itbis { get; set; }
+    public decimal? Itbis { get; set; }
 
-    public virtual Categorium Categoria { get; set; } = null!;
+    public virtual Categoria Categoria { get; set; } = null!;
 
     public virtual Marca Marca { get; set; } = null!;
 
-    public virtual ICollection<DetalleOrdenCompra> DetalleOrdenCompras { get; set; } = new List<DetalleOrdenCompra>();
+    public virtual ICollection<CompraDetalle> CompraDetalles { get; set; } = new List<CompraDetalle>();
 
-    public virtual ICollection<DetalleVentum> DetalleVenta { get; set; } = new List<DetalleVentum>();
+    public virtual ICollection<VentaDetalle> VentaDetalles { get; set; } = new List<VentaDetalle>();
 
-    public virtual ICollection<EspecificacionTecnica> EspecificacionTecnicas { get; set; } = new List<EspecificacionTecnica>();
+    public virtual ICollection<EspecificacionTecnica> EspecificacionesTecnicas { get; set; } = new List<EspecificacionTecnica>();
 }

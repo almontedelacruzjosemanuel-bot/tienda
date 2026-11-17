@@ -3,18 +3,13 @@ namespace tienda.DTOs;
 
 public class VentaDto
 {
-    public int IdVenta { get; set; }
-
-    public int IdCliente { get; set; }
-
-    public int IdEmpleado { get; set; }
-
-    public DateTime FechaVenta { get; set; }
-
+    public int VentaId { get; set; }
+    public int ClienteId { get; set; }
+    public int EmpleadoId { get; set; }
+    public DateTime Fecha { get; set; }
     public decimal Total { get; set; }
-
-    public string? MetodoPago { get; set; }
-
-    public string? Estado { get; set; }
+    public decimal Subtotal { get; set; }
+    public decimal Itbis { get; set; }
+    public string? ComprobanteFiscal { get; set; }
+    public int? MetodoPagoId { get; set; }
 }
-

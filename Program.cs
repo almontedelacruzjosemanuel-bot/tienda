@@ -1,6 +1,8 @@
+
 using Microsoft.EntityFrameworkCore;
 using tienda.Models;
 using tienda.Components;
+using tienda.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,21 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<TiendaContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("TiendaConnection")));
+
+builder.Services.AddScoped<CategoriaService>();
+builder.Services.AddScoped<CiudadService>();
+builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<CompraService>();
+builder.Services.AddScoped<CompraDetalleService>();
+builder.Services.AddScoped<EmpleadoService>();
+builder.Services.AddScoped<EspecificacionTecnicaService>();
+builder.Services.AddScoped<MarcaService>();
+builder.Services.AddScoped<MetodoPagoService>();
+builder.Services.AddScoped<ProductoService>();
+builder.Services.AddScoped<ProveedorService>();
+builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<VentaService>();
+builder.Services.AddScoped<VentaDetalleService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

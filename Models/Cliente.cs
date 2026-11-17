@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
-public partial class Cliente
+public class Cliente
 {
-    public int IdCliente { get; set; }
-
-    public string? Nombre { get; set; }
-
-    public string? Apellido { get; set; }
+    public int ClienteId { get; set; }
 
     public string? DocumentoIdentidad { get; set; }
 
@@ -21,5 +15,11 @@ public partial class Cliente
 
     public DateOnly? FechaRegistro { get; set; }
 
-    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
+    public string? NombreCompleto { get; set; }
+
+    public int? CiudadId { get; set; }
+
+    public virtual Ciudad? Ciudad { get; set; }
+
+    public virtual ICollection<Venta> Ventas { get; set; } = new List<Venta>();
 }

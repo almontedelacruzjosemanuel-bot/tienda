@@ -16,10 +16,10 @@ public class ProveedorService
 
     public async Task<List<ProveedorDto>> ObtenerTodos()
     {
-        return await _context.Proveedors
+        return await _context.Proveedores
             .Select(p => new ProveedorDto
             {
-                IdProveedor = p.IdProveedor,
+                ProveedorId = p.ProveedorId,
                 NombreEmpresa = p.NombreEmpresa,
                 ContactoNombre = p.ContactoNombre,
                 Telefono = p.Telefono,
@@ -31,11 +31,11 @@ public class ProveedorService
 
     public async Task<ProveedorDto?> ObtenerPorId(int id)
     {
-        return await _context.Proveedors
-            .Where(p => p.IdProveedor == id)
+        return await _context.Proveedores
+            .Where(p => p.ProveedorId == id)
             .Select(p => new ProveedorDto
             {
-                IdProveedor = p.IdProveedor,
+                ProveedorId = p.ProveedorId,
                 NombreEmpresa = p.NombreEmpresa,
                 ContactoNombre = p.ContactoNombre,
                 Telefono = p.Telefono,
@@ -43,5 +43,55 @@ public class ProveedorService
                 Direccion = p.Direccion
             })
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<ProveedorDto> Crear(ProveedorDto dto)
+    {
+        var proveedor = new Proveedor
+        {
+            NombreEmpresa = dto.NombreEmpresa,
+            ContactoNombre = dto.ContactoNombre,
+            Telefono = dto.Telefono,
+            Email = dto.Email,
+            Direccion = dto.Direccion
+        };
+
+        _context.Proveedores.Add(proveedor);
+        await _context.SaveChangesAsync();
+
+        dto.ProveedorId = proveedor.ProveedorId;
+
+        return dto;
+    }
+
+    public async Task<bool> Actualizar(int id, ProveedorDto dto)
+    {
+        var proveedor = await _context.Proveedores.FindAsync(id);
+
+        if (proveedor == null)
+            return false;
+
+        proveedor.NombreEmpresa = dto.NombreEmpresa;
+        proveedor.ContactoNombre = dto.ContactoNombre;
+        proveedor.Telefono = dto.Telefono;
+        proveedor.Email = dto.Email;
+        proveedor.Direccion = dto.Direccion;
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> Eliminar(int id)
+    {
+        var proveedor = await _context.Proveedores.FindAsync(id);
+
+        if (proveedor == null)
+            return false;
+
+        _context.Proveedores.Remove(proveedor);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }

@@ -3,11 +3,7 @@ namespace tienda.DTOs;
 
 public class ClienteDto
 {
-    public int IdCliente { get; set; }
-
-    public string? Nombre { get; set; }
-
-    public string? Apellido { get; set; }
+    public int ClienteId { get; set; }
 
     public string? DocumentoIdentidad { get; set; }
 
@@ -18,4 +14,8 @@ public class ClienteDto
     public string? Direccion { get; set; }
 
     public DateOnly? FechaRegistro { get; set; }
+
+    public string? NombreCompleto { get; set; }
+
+    public int? CiudadId { get; set; }
 }

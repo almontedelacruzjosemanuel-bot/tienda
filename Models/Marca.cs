@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
-public partial class Marca
+public class Marca
 {
-    public int IdMarca { get; set; }
+    public int MarcaId { get; set; }
 
     public string? Nombre { get; set; }
 
