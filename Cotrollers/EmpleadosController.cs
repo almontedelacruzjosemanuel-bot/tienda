@@ -1,82 +1,82 @@
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using tienda.Models;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using tienda.Models;
 
-namespace tienda.Controllers;
+//namespace tienda.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class EmpleadosController : ControllerBase
-{
-    private readonly TiendaContext _context;
+//[ApiController]
+//[Route("api/[controller]")]
+//public class EmpleadosController : ControllerBase
+//{
+//    private readonly TiendaContext _context;
 
-    public EmpleadosController(TiendaContext context)
-    {
-        _context = context;
-    }
+//    public EmpleadosController(TiendaContext context)
+//    {
+//        _context = context;
+//    }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Empleado>>> GetEmpleados()
-    {
-        return await _context.Empleados.ToListAsync();
-    }
+//    [HttpGet]
+//    public async Task<ActionResult<IEnumerable<Empleado>>> GetEmpleados()
+//    {
+//        return await _context.Empleados.ToListAsync();
+//    }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Empleado>> GetEmpleado(int id)
-    {
-        var empleado = await _context.Empleados.FindAsync(id);
+//    [HttpGet("{id}")]
+//    public async Task<ActionResult<Empleado>> GetEmpleado(int id)
+//    {
+//        var empleado = await _context.Empleados.FindAsync(id);
 
-        if (empleado == null)
-            return NotFound();
+//        if (empleado == null)
+//            return NotFound();
 
-        return empleado;
-    }
+//        return empleado;
+//    }
 
-    [HttpPost]
-    public async Task<ActionResult<Empleado>> CrearEmpleado(Empleado empleado)
-    {
-        _context.Empleados.Add(empleado);
-        await _context.SaveChangesAsync();
+//    [HttpPost]
+//    public async Task<ActionResult<Empleado>> CrearEmpleado(Empleado empleado)
+//    {
+//        _context.Empleados.Add(empleado);
+//        await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetEmpleado),
-            new { id = empleado.IdEmpleado }, empleado);
-    }
+//        return CreatedAtAction(nameof(GetEmpleado),
+//            new { id = empleado.IdEmpleado }, empleado);
+//    }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> ActualizarEmpleado(int id, Empleado empleado)
-    {
-        if (id != empleado.IdEmpleado)
-            return BadRequest();
+//    [HttpPut("{id}")]
+//    public async Task<IActionResult> ActualizarEmpleado(int id, Empleado empleado)
+//    {
+//        if (id != empleado.IdEmpleado)
+//            return BadRequest();
 
-        var existente = await _context.Empleados.FindAsync(id);
+//        var existente = await _context.Empleados.FindAsync(id);
 
-        if (existente == null)
-            return NotFound();
+//        if (existente == null)
+//            return NotFound();
 
-        existente.Nombre = empleado.Nombre;
-        existente.Apellido = empleado.Apellido;
-        existente.Cargo = empleado.Cargo;
-        existente.Email = empleado.Email;
-        existente.Telefono = empleado.Telefono;
-        existente.FechaContratacion = empleado.FechaContratacion;
+//        existente.Nombre = empleado.Nombre;
+//        existente.Apellido = empleado.Apellido;
+//        existente.Cargo = empleado.Cargo;
+//        existente.Email = empleado.Email;
+//        existente.Telefono = empleado.Telefono;
+//        existente.FechaContratacion = empleado.FechaContratacion;
 
-        await _context.SaveChangesAsync();
+//        await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
+//        return NoContent();
+//    }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> EliminarEmpleado(int id)
-    {
-        var empleado = await _context.Empleados.FindAsync(id);
+//    [HttpDelete("{id}")]
+//    public async Task<IActionResult> EliminarEmpleado(int id)
+//    {
+//        var empleado = await _context.Empleados.FindAsync(id);
 
-        if (empleado == null)
-            return NotFound();
+//        if (empleado == null)
+//            return NotFound();
 
-        _context.Empleados.Remove(empleado);
-        await _context.SaveChangesAsync();
+//        _context.Empleados.Remove(empleado);
+//        await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
-}
+//        return NoContent();
+//    }
+//}

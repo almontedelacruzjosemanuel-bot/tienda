@@ -1,83 +1,83 @@
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using tienda.Models;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using tienda.Models;
 
-namespace tienda.Controllers;
+//namespace tienda.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class EspecificacionesTecnicasController : ControllerBase
-{
-    private readonly TiendaContext _context;
+//[ApiController]
+//[Route("api/[controller]")]
+//public class EspecificacionesTecnicasController : ControllerBase
+//{
+//    private readonly TiendaContext _context;
 
-    public EspecificacionesTecnicasController(TiendaContext context)
-    {
-        _context = context;
-    }
+//    public EspecificacionesTecnicasController(TiendaContext context)
+//    {
+//        _context = context;
+//    }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<EspecificacionTecnica>>> GetEspecificaciones()
-    {
-        return await _context.EspecificacionTecnicas
-            .Include(e => e.IdProductoNavigation)
-            .ToListAsync();
-    }
+//    [HttpGet]
+//    public async Task<ActionResult<IEnumerable<EspecificacionTecnica>>> GetEspecificaciones()
+//    {
+//        return await _context.EspecificacionTecnicas
+//            .Include(e => e.IdProductoNavigation)
+//            .ToListAsync();
+//    }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<EspecificacionTecnica>> GetEspecificacion(int id)
-    {
-        var especificacion = await _context.EspecificacionTecnicas
-            .Include(e => e.IdProductoNavigation)
-            .FirstOrDefaultAsync(e => e.IdEspecificacion == id);
+//    [HttpGet("{id}")]
+//    public async Task<ActionResult<EspecificacionTecnica>> GetEspecificacion(int id)
+//    {
+//        var especificacion = await _context.EspecificacionTecnicas
+//            .Include(e => e.IdProductoNavigation)
+//            .FirstOrDefaultAsync(e => e.IdEspecificacion == id);
 
-        if (especificacion == null)
-            return NotFound();
+//        if (especificacion == null)
+//            return NotFound();
 
-        return especificacion;
-    }
+//        return especificacion;
+//    }
 
-    [HttpPost]
-    public async Task<ActionResult<EspecificacionTecnica>> CrearEspecificacion(EspecificacionTecnica especificacion)
-    {
-        _context.EspecificacionTecnicas.Add(especificacion);
-        await _context.SaveChangesAsync();
+//    [HttpPost]
+//    public async Task<ActionResult<EspecificacionTecnica>> CrearEspecificacion(EspecificacionTecnica especificacion)
+//    {
+//        _context.EspecificacionTecnicas.Add(especificacion);
+//        await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetEspecificacion),
-            new { id = especificacion.IdEspecificacion }, especificacion);
-    }
+//        return CreatedAtAction(nameof(GetEspecificacion),
+//            new { id = especificacion.IdEspecificacion }, especificacion);
+//    }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> ActualizarEspecificacion(int id, EspecificacionTecnica especificacion)
-    {
-        if (id != especificacion.IdEspecificacion)
-            return BadRequest();
+//    [HttpPut("{id}")]
+//    public async Task<IActionResult> ActualizarEspecificacion(int id, EspecificacionTecnica especificacion)
+//    {
+//        if (id != especificacion.IdEspecificacion)
+//            return BadRequest();
 
-        var existente = await _context.EspecificacionTecnicas.FindAsync(id);
+//        var existente = await _context.EspecificacionTecnicas.FindAsync(id);
 
-        if (existente == null)
-            return NotFound();
+//        if (existente == null)
+//            return NotFound();
 
-        existente.IdProducto = especificacion.IdProducto;
-        existente.Clave = especificacion.Clave;
-        existente.Valor = especificacion.Valor;
+//        existente.IdProducto = especificacion.IdProducto;
+//        existente.Clave = especificacion.Clave;
+//        existente.Valor = especificacion.Valor;
 
-        await _context.SaveChangesAsync();
+//        await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
+//        return NoContent();
+//    }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> EliminarEspecificacion(int id)
-    {
-        var especificacion = await _context.EspecificacionTecnicas.FindAsync(id);
+//    [HttpDelete("{id}")]
+//    public async Task<IActionResult> EliminarEspecificacion(int id)
+//    {
+//        var especificacion = await _context.EspecificacionTecnicas.FindAsync(id);
 
-        if (especificacion == null)
-            return NotFound();
+//        if (especificacion == null)
+//            return NotFound();
 
-        _context.EspecificacionTecnicas.Remove(especificacion);
-        await _context.SaveChangesAsync();
+//        _context.EspecificacionTecnicas.Remove(especificacion);
+//        await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
-}
+//        return NoContent();
+//    }
+//}

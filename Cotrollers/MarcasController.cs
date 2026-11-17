@@ -1,79 +1,79 @@
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using tienda.Models;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using tienda.Models;
 
-namespace tienda.Controllers;
+//namespace tienda.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class MarcasController : ControllerBase
-{
-    private readonly TiendaContext _context;
+//[ApiController]
+//[Route("api/[controller]")]
+//public class MarcasController : ControllerBase
+//{
+//    private readonly TiendaContext _context;
 
-    public MarcasController(TiendaContext context)
-    {
-        _context = context;
-    }
+//    public MarcasController(TiendaContext context)
+//    {
+//        _context = context;
+//    }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Marca>>> GetMarcas()
-    {
-        return await _context.Marcas.ToListAsync();
-    }
+//    [HttpGet]
+//    public async Task<ActionResult<IEnumerable<Marca>>> GetMarcas()
+//    {
+//        return await _context.Marcas.ToListAsync();
+//    }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Marca>> GetMarca(int id)
-    {
-        var marca = await _context.Marcas.FindAsync(id);
+//    [HttpGet("{id}")]
+//    public async Task<ActionResult<Marca>> GetMarca(int id)
+//    {
+//        var marca = await _context.Marcas.FindAsync(id);
 
-        if (marca == null)
-            return NotFound();
+//        if (marca == null)
+//            return NotFound();
 
-        return marca;
-    }
+//        return marca;
+//    }
 
-    [HttpPost]
-    public async Task<ActionResult<Marca>> CrearMarca(Marca marca)
-    {
-        _context.Marcas.Add(marca);
-        await _context.SaveChangesAsync();
+//    [HttpPost]
+//    public async Task<ActionResult<Marca>> CrearMarca(Marca marca)
+//    {
+//        _context.Marcas.Add(marca);
+//        await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetMarca),
-            new { id = marca.IdMarca }, marca);
-    }
+//        return CreatedAtAction(nameof(GetMarca),
+//            new { id = marca.IdMarca }, marca);
+//    }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> ActualizarMarca(int id, Marca marca)
-    {
-        if (id != marca.IdMarca)
-            return BadRequest();
+//    [HttpPut("{id}")]
+//    public async Task<IActionResult> ActualizarMarca(int id, Marca marca)
+//    {
+//        if (id != marca.IdMarca)
+//            return BadRequest();
 
-        var existente = await _context.Marcas.FindAsync(id);
+//        var existente = await _context.Marcas.FindAsync(id);
 
-        if (existente == null)
-            return NotFound();
+//        if (existente == null)
+//            return NotFound();
 
-        existente.Nombre = marca.Nombre;
-        existente.PaisOrigen = marca.PaisOrigen;
-        existente.SitioWeb = marca.SitioWeb;
+//        existente.Nombre = marca.Nombre;
+//        existente.PaisOrigen = marca.PaisOrigen;
+//        existente.SitioWeb = marca.SitioWeb;
 
-        await _context.SaveChangesAsync();
+//        await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
+//        return NoContent();
+//    }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> EliminarMarca(int id)
-    {
-        var marca = await _context.Marcas.FindAsync(id);
+//    [HttpDelete("{id}")]
+//    public async Task<IActionResult> EliminarMarca(int id)
+//    {
+//        var marca = await _context.Marcas.FindAsync(id);
 
-        if (marca == null)
-            return NotFound();
+//        if (marca == null)
+//            return NotFound();
 
-        _context.Marcas.Remove(marca);
-        await _context.SaveChangesAsync();
+//        _context.Marcas.Remove(marca);
+//        await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
-}
+//        return NoContent();
+//    }
+//}

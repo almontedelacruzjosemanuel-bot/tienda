@@ -5,7 +5,7 @@ namespace tienda.Models;
 
 public partial class Proveedor
 {
-    public int IdProveedor { get; set; }
+    public int ProveedorId { get; set; }
 
     public string? NombreEmpresa { get; set; }
 
@@ -17,5 +17,5 @@ public partial class Proveedor
 
     public string? Direccion { get; set; }
 
-    public virtual ICollection<OrdenCompra> OrdenCompras { get; set; } = new List<OrdenCompra>();
+    public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
 }

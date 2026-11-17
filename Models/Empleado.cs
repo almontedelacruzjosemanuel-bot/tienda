@@ -5,7 +5,7 @@ namespace tienda.Models;
 
 public partial class Empleado
 {
-    public int IdEmpleado { get; set; }
+    public int EmpleadoId { get; set; }
 
     public string? Nombre { get; set; }
 
@@ -19,7 +19,9 @@ public partial class Empleado
 
     public DateOnly? FechaContratacion { get; set; }
 
-    public virtual ICollection<OrdenCompra> OrdenCompras { get; set; } = new List<OrdenCompra>();
+    public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
 
-    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
+    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+
+    public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 }

@@ -15,7 +15,5 @@ public partial class DetalleOrdenCompra
 
     public decimal Subtotal { get; set; }
 
-    public virtual OrdenCompra Compra { get; set; } = null!;
-
     public virtual Producto Producto { get; set; } = null!;
 }

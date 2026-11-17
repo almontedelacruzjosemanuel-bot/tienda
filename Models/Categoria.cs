@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace tienda.Models;
 
-public partial class Categorium
+public partial class Categoria
 {
-    public int IdCategoria { get; set; }
+    public int CategoriaId { get; set; }
 
     public string? Nombre { get; set; }
 
