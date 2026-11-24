@@ -1,39 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace tienda.Models;
 
-public partial class Producto
+public class Producto
 {
-    public int IdProducto { get; set; }
+    public int ProductoId { get; set; }
 
-    public int IdCategoria { get; set; }
+    public int CategoriaId { get; set; }
 
-    public int IdMarca { get; set; }
+    public int MarcaId { get; set; }
 
-    public string? CodigoSku { get; set; }
+    public string? Sku { get; set; }
 
     public string? Nombre { get; set; }
 
     public string? Descripcion { get; set; }
 
-    public decimal? PrecioCompra { get; set; }
+    public decimal Costo { get; set; }
 
-    public decimal? PrecioVenta { get; set; }
+    public decimal Precio { get; set; }
 
-    public int? StockActual { get; set; }
+    public int? Stock { get; set; }
 
-    public int? StockMinimo { get; set; }
+    public int? PuntoReorden { get; set; }
 
-    public string? GarantiaMeses { get; set; }
+    public string? Garantia { get; set; }
 
-    public virtual ICollection<DetalleOrdenCompra> DetalleOrdenCompras { get; set; } = new List<DetalleOrdenCompra>();
+    public decimal? MargenGanancia { get; set; }
 
-    public virtual ICollection<DetalleVentum> DetalleVenta { get; set; } = new List<DetalleVentum>();
+    public decimal? Itbis { get; set; }
 
-    public virtual ICollection<EspecificacionTecnica> EspecificacionTecnicas { get; set; } = new List<EspecificacionTecnica>();
+    public virtual Categoria Categoria { get; set; } = null!;
 
-    public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
+    public virtual Marca Marca { get; set; } = null!;
 
-    public virtual Marca IdMarcaNavigation { get; set; } = null!;
+    public virtual ICollection<CompraDetalle> CompraDetalles { get; set; } = new List<CompraDetalle>();
+
+    public virtual ICollection<VentaDetalle> VentaDetalles { get; set; } = new List<VentaDetalle>();
+
+    public virtual ICollection<EspecificacionTecnica> EspecificacionesTecnicas { get; set; } = new List<EspecificacionTecnica>();
 }
