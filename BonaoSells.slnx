@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="BonaoSells.API/BonaoSells.API.csproj" Id="d95acc71-dd61-473d-b036-afeed34b5e90" />
+  <Project Path="BonaoSells.Application/BonaoSells.Application.csproj" Id="5243363c-ed5e-4237-9349-3837eddf037e" />
+  <Project Path="BonaoSells.ApplicationTest/BonaoSells.ApplicationTest.csproj" Id="3fe1b5d1-a571-43cb-8d72-f2bcacaf8eba" />
+  <Project Path="BonaoSells.Blazor/BonaoSells.Blazor.csproj" Id="5aa21761-eed3-475a-90e2-6e62e6a88d27" />
+  <Project Path="BonaoSells.Infrastructure/BonaoSells.Infrastructure.csproj" Id="e6bd440c-b19e-4885-9078-9d4ac5d57398" />
+  <Project Path="BonaoSells.WinForms/BonaoSells.WinForms.csproj" Id="ebc6640e-c957-48ca-992f-16aa0b0fd61a" />
+</Solution>

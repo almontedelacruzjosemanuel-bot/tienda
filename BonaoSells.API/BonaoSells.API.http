@@ -1,0 +1,6 @@
+@BonaoSells.API_HostAddress = http://localhost:5182
+
+GET {{BonaoSells.API_HostAddress}}/
+Accept: application/json
+
+###
