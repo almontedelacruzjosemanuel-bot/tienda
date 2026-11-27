@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <PropertyGroup>
+    <UseWorkloadResolver>false</UseWorkloadResolver>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="BonaoSells.API\**" />

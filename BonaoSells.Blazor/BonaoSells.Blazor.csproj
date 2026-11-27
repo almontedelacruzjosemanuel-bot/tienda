@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BonaoSells.Application\BonaoSells.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="BonaoSells.API\**" />
     <Content Remove="BonaoSells.API\**" />
     <EmbeddedResource Remove="BonaoSells.API\**" />

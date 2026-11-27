@@ -1,0 +1,32 @@
+@page "/categorias"
+@using BonaoSells.Application.DTOs
+@inject ApiService Api
+
+<h3>Categorías</h3>
+
+@if (categorias == null)
+{
+    <p>Cargando...</p>
+}
+else if (categorias.Count == 0)
+{
+    <p>No hay categorías.</p>
+}
+else
+{
+    <ul>
+        @foreach (var cat in categorias)
+        {
+            <li>@cat.Nombre</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<CategoriaDto>? categorias;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categorias = await Api.GetCategoriasAsync();
+    }
+}

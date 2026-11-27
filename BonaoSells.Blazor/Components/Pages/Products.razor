@@ -1,0 +1,32 @@
+@page "/productos"
+@using BonaoSells.Application.DTOs
+@inject ApiService Api
+
+<h3>Productos</h3>
+
+@if (productos == null)
+{
+    <p>Cargando...</p>
+}
+else if (productos.Count == 0)
+{
+    <p>No hay productos.</p>
+}
+else
+{
+    <ul>
+        @foreach (var p in productos)
+        {
+            <li>@p.Nombre</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<ProductoDto>? productos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        productos = await Api.GetProductosAsync();
+    }
+}
